@@ -6,7 +6,7 @@ namespace TodoApp.MVC.Models.ViewModels;
  * Bu model, kullanıcıların ad ve kullanıcı adı bilgilerini içerir.
  *
  * Özellikler:
- * - FirstName: Kullanıcının ilk adı.
+ * - FirstName: Kullanıcının adı.
  * - LastName: Kullanıcının soyadı.
  * - Username: Kullanıcının sistemdeki kullanıcı adı.
  *

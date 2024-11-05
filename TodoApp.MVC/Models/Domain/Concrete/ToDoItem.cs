@@ -5,8 +5,8 @@ namespace TodoApp.MVC.Models.Domain.Concrete;
 
 /*
  * ToDoItem sınıfı, kullanıcıların yapılacaklar listesindeki her bir öğeyi temsil eder. EntityBase sınıfından
- * türetilmiştir ve tüm temel özellikleri miras alır. Bu sınıf, yapılacak öğesiyle ilgili başlık, açıklama, tamamlanma
- * durumu ve kullanıcı bilgilerini içerir.
+ * türetilmiştir ve tüm temel özellikleri miras alır. Bu sınıf, yapılacak öğesiyle ilgili başlık, açıklama,
+ * tamamlanma durumu ve kullanıcı bilgilerini içerir.
  *
  * Özellikler:
  * - Title: Yapılacak öğenin kısa başlığı.
@@ -16,9 +16,9 @@ namespace TodoApp.MVC.Models.Domain.Concrete;
  * - UserId: Yapılacak öğeyi oluşturan kullanıcıya ait kimlik.
  * - User: Yapılacak öğeyi oluşturan kullanıcıya referans, kullanıcı bilgilerine erişim sağlar.
  *
- * Yapıcı Metotlar:
- * - Varsayılan yapıcı metot, CreatedAt özelliğini ayarlar ve IsCompleted'i false olarak başlatır.
- * - Parametreli yapıcı metot, başlık, açıklama ve UserId bilgilerini alır,
+ * Constructor Metotlar:
+ * - Varsayılan yapıcı metot: CreatedAt özelliğini ayarlar ve IsCompleted'i false olarak başlatır.
+ * - Parametreli yapıcı metot: Başlık, açıklama ve UserId bilgilerini alır,
  *   IsCompleted'i false olarak başlatır, CreatedAt ve IsDeleted özelliklerini ayarlar.
  */
 public class ToDoItem : EntityBase

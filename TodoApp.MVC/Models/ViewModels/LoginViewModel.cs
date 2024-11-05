@@ -9,7 +9,7 @@ namespace TodoApp.MVC.Models.ViewModels;
  * - Username: Kullanıcının giriş yaparken kullanacağı kullanıcı adı.
  * - Password: Kullanıcının giriş yaparken kullanacağı şifre.
  *
- * Bu sınıf, kullanıcıların giriş işlemleri sırasındagereken bilgilerin toplanmasını ve işlenmesini sağlar.
+ * Bu sınıf, kullanıcıların giriş işlemleri sırasında gereken bilgilerin toplanmasını ve işlenmesini sağlar.
  */
 public class LoginViewModel
 {

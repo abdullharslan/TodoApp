@@ -12,7 +12,7 @@ namespace TodoApp.MVC.Models.DTOs;
  * - Password: Kullanıcının kayıt sırasında belirleyeceği şifre.
  *
  * Constructor Metot:
- * - Parametreli yapıcı metot, kullanıcının ilk adı, soyadı, kullanıcı adı ve şifre bilgilerini alır ve ilgili
+ * - Parametreli constructor: Kullanıcının ilk adı, soyadı, kullanıcı adı ve şifre bilgilerini alır ve ilgili
  *   özellikleri başlatır.
  */
 public class RegisterDTO

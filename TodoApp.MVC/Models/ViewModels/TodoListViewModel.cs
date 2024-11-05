@@ -2,20 +2,17 @@
 namespace TodoApp.MVC.Models.ViewModels;
 
 /*
- * TodoListViewModel sınıfı, kullanıcı arayüzünde (View) yapılacaklar listesinin yönetimi için kullanılan veri modelini
- * temsil eder. Bu model, kullanıcının tamamlanmış ve tamamlanmamış yapılacak öğelerini gruplar halinde sunar.
+ * TodoListViewModel sınıfı, kullanıcı arayüzünde yapılacaklar listesinin yönetimi için kullanılan bir veri modelidir.
+ * Bu model, kullanıcıların tamamlanmış ve tamamlanmamış yapılacak öğelerini tek bir koleksiyon olarak alır ve arayüzde
+ * gruplandırılmış biçimde sunulmasını sağlar.
  *
  * Özellikler:
- * - CompletedTodos: Tamamlanmış yapılacak öğelerini içeren koleksiyon.
- * - IncompleteTodos: Tamamlanmamış yapılacak öğelerini içeren koleksiyon.
- * - AllTodos: Tüm yapılacak öğelerini içeren koleksiyon.
+ * - AllTodos: Kullanıcının tüm yapılacak öğelerini (tamamlanmış ve tamamlanmamış) içeren koleksiyon.
  *
- * Bu sınıf, kullanıcıların yapılacaklar listelerini daha etkin bir şekilde görüntülemelerine ve yönetmelerine
- * olanak tanır.
+ * Bu sınıf, kullanıcıların yapılacaklar listesine daha kolay erişim sağlayarak listeyi etkin bir şekilde
+ * yönetmelerine ve gözden geçirmelerine olanak tanır.
  */
 public class TodoListViewModel
 {
-    public IEnumerable<TodoViewModel> CompletedTodos { get; set; }
-    public IEnumerable<TodoViewModel> IncompleteTodos { get; set; }
-    public IEnumerable<TodoViewModel> AllTodos { get; set; }
+    public IEnumerable<TodoViewModel> AllTodos { get; set; } = new List<TodoViewModel>();
 }

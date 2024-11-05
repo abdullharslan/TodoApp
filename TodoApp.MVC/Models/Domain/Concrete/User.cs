@@ -4,9 +4,9 @@ using TodoApp.MVC.Models.Domain.Abstract;
 namespace TodoApp.MVC.Models.Domain.Concrete;
 
 /*
- * User sınıfı, uygulamadaki kullanıcıları temsil eder ve EntityBase sınıfından türetilmiştir. Bu sınıf, kullanıcıya
- * özgü Username, Password, FirstName, LastName gibi özellikleri içerir ve her kullanıcıya ait yapılacaklar listesini
- * ToDoItems özelliğiyle tutar.
+ * User sınıfı, uygulamadaki kullanıcıları temsil eder ve EntityBase sınıfından türetilmiştir. Bu sınıf,
+ * kullanıcıya özgü Username, Password, FirstName, LastName gibi özellikleri içerir ve her kullanıcıya
+ * ait yapılacaklar listesini ToDoItems özelliğiyle tutar.
  *
  * Özellikler:
  * - Username: Kullanıcının benzersiz kullanıcı adı.
@@ -15,10 +15,10 @@ namespace TodoApp.MVC.Models.Domain.Concrete;
  * - LastName: Kullanıcının soyadı.
  * - ToDoItems: Kullanıcının yapılacaklar listesi, ToDoItem koleksiyonu olarak saklanır.
  *
- * Yapıcı Metotlar:
- * - Varsayılan yapıcı metot, ToDoItems listesini başlatır, CreatedAt özelliğini ayarlar ve IsDeleted'i false yapar.
- * - Parametreli yapıcı metot, kullanıcı bilgilerini alır, ToDoItems listesini başlatır, CreatedAt özelliğini ayarlar
- * ve IsDeleted'i false yapar.
+ * Constructor Metotlar:
+ * - Varsayılan Constructor: ToDoItems listesini başlatır, CreatedAt özelliğini ayarlar ve IsDeleted'i false yapar.
+ * - Parametreli Constructor: Kullanıcı bilgilerini alır, ToDoItems listesini başlatır, CreatedAt özelliğini ayarlar
+ *   ve IsDeleted'i false yapar.
  */
 public class User : EntityBase
 {

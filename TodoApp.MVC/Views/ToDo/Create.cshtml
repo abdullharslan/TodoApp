@@ -1,0 +1,76 @@
+@model TodoApp.MVC.Models.ViewModels.TodoViewModel
+
+@{
+ViewData["Title"] = "Yeni Görev";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm mt-5">
+            <div class="card-header bg-primary text-white">
+                <h2 class="text-center mb-0">
+                    <i class="bi bi-plus-circle me-2"></i>Yeni Görev
+                </h2>
+            </div>
+            <div class="card-body">
+                @if (!ViewData.ModelState.IsValid)
+                {
+                <div class="alert alert-danger">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                </div>
+                }
+
+                <form asp-action="Create" method="post" id="createForm">
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Title" class="form-label">Başlık</label>
+                        <input asp-for="Title" class="form-control" required maxlength="100" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Description" class="form-label">Açıklama</label>
+                        <textarea asp-for="Description" class="form-control" rows="3"
+                                  maxlength="1000" required></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                        <div class="form-text" id="descriptionHelp"></div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary" id="submitButton">
+                            <i class="bi bi-save me-2"></i>
+                            <span>Kaydet</span>
+                            <span class="spinner-border spinner-border-sm d-none" role="status"></span>
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="bi bi-x-circle me-2"></i>İptal
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+<script>
+    $(document).ready(function() {
+        // Karakter sayısı gösterimi
+        $('#Description').on('input', function() {
+            var maxLength = $(this).attr('maxlength');
+            var currentLength = $(this).val().length;
+            $('#descriptionHelp').text(`${currentLength}/${maxLength} karakter`);
+        });
+
+        // Form submit
+        $('#createForm').on('submit', function() {
+            var btn = $('#submitButton');
+            btn.prop('disabled', true);
+            btn.find('span:not(.spinner-border)').addClass('d-none');
+            btn.find('.spinner-border').removeClass('d-none');
+        });
+    });
+</script>
+}

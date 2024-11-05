@@ -1,0 +1,124 @@
+@* This view is used to display a list of tasks with options to filter, mark as completed, edit, or delete each task *@
+@model TodoApp.MVC.Models.ViewModels.TodoListViewModel
+
+@{
+ViewData["Title"] = "Görevlerim";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2 class="mb-0">
+                    <i class="bi bi-list-task me-2"></i>Görevlerim
+                </h2>
+                <a asp-action="Create" class="btn btn-light">
+                    <i class="bi bi-plus-circle me-2"></i>Yeni Görev
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <div class="btn-group" role="group">
+                    <a asp-action="Index"
+                       class="btn @(ViewBag.IsCompleted == null ? "btn-primary" : "btn-outline-primary")">
+                        <i class="bi bi-collection me-2"></i>Tümü
+                    </a>
+                    <a asp-action="Index"
+                       asp-route-isCompleted="false"
+                       class="btn @(ViewBag.IsCompleted == false ? "btn-primary" : "btn-outline-primary")">
+                        <i class="bi bi-hourglass-split me-2"></i>Devam Edenler
+                    </a>
+                    <a asp-action="Index"
+                       asp-route-isCompleted="true"
+                       class="btn @(ViewBag.IsCompleted == true ? "btn-primary" : "btn-outline-primary")">
+                        <i class="bi bi-check-circle me-2"></i>Tamamlananlar
+                    </a>
+                </div>
+            </div>
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+            <div class="alert alert-success alert-dismissible fade show">
+                <i class="bi bi-check-circle me-2"></i>@TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            }
+
+            @if (!Model.AllTodos.Any())
+            {
+            <div class="alert alert-info">
+                <i class="bi bi-info-circle me-2"></i>
+                Henüz görev bulunmuyor. Yeni görev eklemek için "Yeni Görev" butonunu kullanın.
+            </div>
+            }
+            else
+            {
+            <div class="list-group">
+                @foreach (var todo in Model.AllTodos)
+                {
+                <div class="list-group-item @(todo.IsCompleted ? "bg-light" : "")">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center" style="max-width: calc(100% - 100px);">
+                            <form asp-action="ToggleComplete"
+                                  asp-route-id="@todo.Id"
+                                  method="post" style="margin-right: 10px;">
+                                @Html.AntiForgeryToken()
+                                <button type="submit"
+                                        class="btn btn-sm @(todo.IsCompleted ? "btn-success" : "btn-outline-success")"
+                                        data-bs-toggle="tooltip"
+                                        title="@(todo.IsCompleted ? "Tamamlandı olarak işaretlendi" : "Tamamlandı olarak işaretle")">
+                                    <i class="bi @(todo.IsCompleted ? "bi-check-circle-fill" : "bi-circle")"></i>
+                                </button>
+                            </form>
+                            <div class="text-truncate">
+                                <h5 class="mb-1 text-truncate @(todo.IsCompleted ? "text-decoration-line-through" : "")"
+                                    data-bs-toggle="tooltip"
+                                    title="@todo.Title">
+                                    @todo.Title
+                                </h5>
+                                <p class="mb-1 text-muted text-truncate"
+                                   data-bs-toggle="tooltip"
+                                   title="@todo.Description">
+                                    @todo.Description
+                                </p>
+                            </div>
+                        </div>
+                        <div class="btn-group" style="min-width: 90px;">
+                            <a asp-action="Edit" asp-route-id="@todo.Id"
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <form asp-action="Delete" asp-route-id="@todo.Id"
+                                  method="post" style="display: inline;">
+                                <button type="submit" class="btn btn-sm btn-outline-danger"
+                                        onclick="return confirm('Bu görevi silmek istediğinize emin misiniz?')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    $(document).ready(function() {
+        // Tooltip initialization
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+
+        // Alert auto-dismiss
+        setTimeout(function() {
+            $('.alert-success').alert('close');
+        }, 5000);
+    });
+</script>
+}

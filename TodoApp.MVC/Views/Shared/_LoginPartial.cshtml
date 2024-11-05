@@ -1,0 +1,44 @@
+<ul class="navbar-nav ms-auto">
+    @if (User.Identity?.IsAuthenticated ?? false)
+    {
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-person-circle"></i>
+            @User.Identity.Name
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+                <a class="dropdown-item" asp-controller="Account" asp-action="Profile">
+                    <i class="bi bi-person"></i> Profil
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">
+                    <i class="bi bi-key"></i> Şifre Değiştir
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+                    <button type="submit" class="dropdown-item text-danger">
+                        <i class="bi bi-box-arrow-right"></i> Çıkış Yap
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </li>
+    }
+    else
+    {
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Account" asp-action="Login">
+            <i class="bi bi-box-arrow-in-right"></i> Giriş Yap
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Account" asp-action="Register">
+            <i class="bi bi-person-plus"></i> Kayıt Ol
+        </a>
+    </li>
+    }
+</ul>

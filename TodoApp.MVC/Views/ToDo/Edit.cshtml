@@ -1,0 +1,107 @@
+@model TodoApp.MVC.Models.ViewModels.TodoViewModel
+
+@{
+ViewData["Title"] = "Görev Düzenle";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm mt-5">
+            <div class="card-header bg-primary text-white">
+                <h2 class="text-center mb-0">
+                    <i class="bi bi-pencil-square me-2"></i>Görev Düzenle
+                </h2>
+            </div>
+            <div class="card-body">
+                @if (!ViewData.ModelState.IsValid)
+                {
+                <div class="alert alert-danger">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                </div>
+                }
+
+                <form asp-action="Edit" method="post" id="editForm">
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Title" class="form-label">Başlık</label>
+                        <input asp-for="Title" class="form-control" required maxlength="100" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Description" class="form-label">Açıklama</label>
+                        <textarea asp-for="Description" class="form-control" rows="3"
+                                  maxlength="1000" required></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                        <div class="form-text" id="descriptionHelp"></div>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input asp-for="IsCompleted" class="form-check-input" type="checkbox" />
+                        <label asp-for="IsCompleted" class="form-check-label">
+                            Tamamlandı
+                            <i class="bi bi-question-circle text-muted"
+                               data-bs-toggle="tooltip"
+                               title="Görev tamamlandıysa işaretleyin"></i>
+                        </label>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary" id="submitButton">
+                            <i class="bi bi-save me-2"></i>
+                            <span class="button-text">Kaydet</span>
+                            <span class="spinner-border spinner-border-sm d-none" role="status"></span>
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="bi bi-x-circle me-2"></i>İptal
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+<script>
+    $(document).ready(function() {
+        // Tooltip initialization
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+
+        // Karakter sayısı gösterimi
+        $('#Description').on('input', function() {
+            var maxLength = $(this).attr('maxlength');
+            var currentLength = $(this).val().length;
+            $('#descriptionHelp').text(`${currentLength}/${maxLength} karakter`);
+        }).trigger('input');
+
+        // Form submit
+        $('#editForm').on('submit', function(e) {
+            if (!this.checkValidity()) {
+                e.preventDefault();
+                return false;
+            }
+
+            var btn = $('#submitButton');
+            btn.prop('disabled', true);
+            btn.find('.bi-save').addClass('d-none');
+            btn.find('.button-text').addClass('d-none');
+            btn.find('.spinner-border').removeClass('d-none');
+        });
+
+        // Validation hatası durumunda butonu reset et
+        $('form').on('invalid', function() {
+            var btn = $('#submitButton');
+            btn.prop('disabled', false);
+            btn.find('.bi-save').removeClass('d-none');
+            btn.find('.button-text').removeClass('d-none');
+            btn.find('.spinner-border').addClass('d-none');
+        });
+    });
+</script>
+}

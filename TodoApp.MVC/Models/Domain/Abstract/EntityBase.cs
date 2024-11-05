@@ -7,13 +7,13 @@ namespace TodoApp.MVC.Models.Domain.Abstract;
  *
  * Id: Her varlık için benzersiz bir kimlik.
  * CreatedAt: Varlığın oluşturulma tarihi ve saati.
- * UpdatedAt: Varlığın son güncellenme tarihi ve saati.
+ * UpdatedAt: Varlığın son güncellenme tarihi ve saati. (nullable olarak tanımlıdır)
  * IsDeleted: Varlığın silinip silinmediğini belirtir.
  */
-public class EntityBase
+public abstract class EntityBase
 {
     public int Id { get; set; }
     public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
     public bool IsDeleted { get; set; }
 }
